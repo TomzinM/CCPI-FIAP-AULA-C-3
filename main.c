@@ -1,33 +1,43 @@
 #include <stdio.h>
+#include <string.h>     
 
 int main(){
-    int valores[100];
-    char response = 'Y';
-    int tamanho;
 
+    char produtos[10][30];
+    char resposta = 'y';
+    char busca[100];
+    int achado;
 
-    printf("Qual tamanho do array?");
-    scanf("%d", &tamanho);
-
-    while (response == 'Y' || response == 'y'){
-        for (int i = 0; i < tamanho; i++){
-            printf("Qual valor quer armazenar no indice %d?", i);
-            scanf(" %d", &valores[i]);
-
+    while (resposta == 'y' || resposta == 'Y'){
+        for (int i = 0; i < 10; i++){
+            printf("Qual o nome do produto %d? ", i+1);
+            fgets(produtos[i], sizeof(produtos[i]), stdin);
         }
-        for (int i = 0; i < tamanho; i++){
-            int valor = valores[i];
-            printf("%d: %d\n", i, valor);
+        for (int i = 0; i < 10; i++){
+        printf("%s", produtos[i]);
         }
-        
 
-        printf("Quer continuar? (Y/N): ");
-        scanf(" %c", &response); 
-;
-        if (response == 'y' || response == 'Y'){
-            continue;
-        }  
-        break;
-  } 
+        printf("Quer reescrever os produtos? (Y/N)");
+        scanf("%c", &resposta);
+        while ((getchar()) != '\n'); 
+
+    }   
+
+    printf("Qual produto quer buscar?");
+    fgets(busca, sizeof(busca), stdin);
+
+    for (int i = 0; i < 10; i++){
+        if (strcmp(busca, produtos[i]) == 0){
+        achado = 1;
+      }
+    }
+
+    if (achado == 1){ 
+        printf("Produto em estoque.");
+    }
+    else{
+        printf("Produto nao encontrado.");
+    }
+     
     return 0;
 }
